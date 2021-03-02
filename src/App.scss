@@ -1,13 +1,18 @@
+/* ==========================================================================
+   LETS BUILD TODOIST
+   ========================================================================== */
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
 
-// General Styling
+// General Settings
 html {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 *,
-*::before,
-*::after {
+*:before,
+*:after {
+    -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
 
@@ -28,16 +33,16 @@ ul {
     padding: 0;
 }
 
-
 // Variables
 $generic-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,
-rgba(0, 0, 0, 0.1) 4px 4px 11px;
+rgba(0, 0, 0, 0.1) 0px 4px 11px;
 $generic-border: 1px solid #f1f1f1;
 $generic-bg: #db4c3f;
 
-
-/* ============== Mixins ============= */
+/* Mixins
+  ============================================ */
 @mixin box-overlay() {
+    -webkit-box-shadow: $generic-box-shadow;
     box-shadow: $generic-box-shadow;
     position: absolute;
     width: 100%;
@@ -47,14 +52,22 @@ $generic-bg: #db4c3f;
 }
 
 @mixin va($va-align: center) {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 
     @if $va-align !=center {
+        -webkit-box-pack: left;
+        -ms-flex-pack: left;
         justify-content: left;
     }
 
     @else {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
     }
 }
@@ -62,7 +75,7 @@ $generic-bg: #db4c3f;
 @mixin no-select {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
@@ -94,8 +107,15 @@ $generic-bg: #db4c3f;
     margin: 2px 5px;
 }
 
+@mixin transparent-button() {
+    background-color: transparent;
+    border: 0;
+}
+
 @mixin task-item() {
     list-style-type: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     line-height: 18px;
     color: #333;
@@ -118,8 +138,8 @@ $generic-bg: #db4c3f;
     }
 }
 
-
-/* ========== DARK MODE ========== */
+/* Darkmode
+  ============================================ */
 .darkmode {
     header {
         -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
@@ -129,12 +149,14 @@ $generic-bg: #db4c3f;
     }
 }
 
-
-/* =========== HEADER =========== */
+/* Header
+  ============================================ */
 header {
     border-bottom: solid 1px #ca2100;
     background-color: $generic-bg;
+    -webkit-transition: height 200ms ease-in;
     transition: height 200ms ease-in;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     height: 44px;
     z-index: 400;
@@ -148,6 +170,8 @@ header {
 
     nav {
         display: grid;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
@@ -165,58 +189,74 @@ header {
         div {
             &.logo {
                 padding-left: 8px;
-                grid-area: 1/1;
+                grid-area: 1 / 1;
 
                 img {
-                    width: 40px;
-                    height: 40px;
+                    width: 24px;
                 }
+
             }
 
             &.settings {
-                grid-area: 1/2;
+                grid-area: 1 / 2;
                 text-align: right;
 
                 ul {
                     float: right;
+                }
 
-                    li {
-                        @include va;
+                ul li {
+                    @include va;
 
-                        list-style-type: none;
-                        cursor: pointer;
-                        width: 30px;
-                        height: 30px;
-                        text-align: center;
-                        vertical-align: middle;
-                        float: left;
+                    list-style-type: none;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    vertical-align: middle;
+                    float: left;
 
-                        &:hover {
-                            border-radius: 3px;
-                            background-color: rgba(255, 255, 255, 0.2);
+                    &:hover {
+                        border-radius: 3px;
+                        background-color: rgba(255, 255, 255, 0.2);
+                    }
+
+                    &.settings__add {
+                        margin-right: 15px;
+                        font-size: 30px;
+
+                        button {
+                            @include transparent-button();
+                            color: white;
+                            cursor: pointer;
+                        }
+                    }
+
+                    &.settings__darkmode {
+                        button {
+                            @include transparent-button();
+                            color: white;
+                            cursor: pointer;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+
+                            svg {
+                                width: 20px;
+                                height: 20px;
+                            }
                         }
 
-                        &.settings__add {
-                            margin-right: 15px;
-                            font-size: 30px;
-                        }
-
-                        &.settings__dark-mode svg {
-                            width: 20px;
-                            height: 20px;
-                        }
                     }
                 }
             }
-
         }
-
     }
 }
 
-
-/* ========== SIDEBAR ========== */
-sidebar {
+/* Sidebar
+  ============================================ */
+.sidebar {
     @include no-select();
     width: 266px;
     height: calc(100vh);
@@ -389,25 +429,29 @@ sidebar {
     }
 }
 
-/*================= Show Confirm Delete =========================== */
+/* Show Confirm Delete
+  ============================================ */
 .project-delete-modal {
-    position: relative;
+    position: fixed;
 
     &__inner {
         @include box-overlay();
-        z-index: 99;
-        width: 200px;
+        z-index: 1;
+        width: 100%;
         padding: 10px;
         top: 10px;
         right: 0;
         background-color: white;
+        position: relative;
+        overflow: auto;
+        bottom: 0;
+        left: 0;
 
         p {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            line-height: normal;
-            font-weight: normal;
-            font-size: 15px;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%;
         }
 
         button {
@@ -416,12 +460,14 @@ sidebar {
 
         span {
             @include cancel();
-            font-weight: normal;
+            padding-top: 10px;
+            font-weight: bold;
         }
     }
 }
 
-/*================= Main Content =========================== */
+/* Main Content
+  ============================================ */
 .content {
     display: grid;
     -webkit-box-align: center;
@@ -432,7 +478,8 @@ sidebar {
     margin: auto;
 }
 
-/*=================== Tasks ========================= */
+/* Tasks
+  ============================================ */
 .tasks {
     width: 656px;
     background-color: white;
@@ -499,7 +546,8 @@ sidebar {
     }
 }
 
-/*================== Add Task ========================== */
+/* Add Task
+  ============================================ */
 .add-task {
     &__overlay {
         background: rgba(102, 102, 102, 0.5);
@@ -609,7 +657,8 @@ sidebar {
     margin-left: 15px;
 }
 
-/*================= Task Date =========================== */
+/* Task Date
+  ============================================ */
 .task-date {
     @include box-overlay();
     background-color: #fff;
@@ -641,7 +690,8 @@ sidebar {
     }
 }
 
-/*================= Project Overlay =========================== */
+/* Project Overlay
+  ============================================ */
 .project-overlay {
     @include box-overlay();
     background-color: white;
@@ -662,7 +712,8 @@ sidebar {
     }
 }
 
-/*================= Add Project =========================== */
+/* Add Project
+  ============================================ */
 .add-project {
     padding-left: 13px;
     padding-right: 20px;
