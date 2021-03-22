@@ -148,6 +148,10 @@ $generic-bg: #db4c3f;
         border-color: transparent;
     }
 
+    main {
+        background-color: #282828;
+    }
+
     body {
         margin: 0;
         padding: 0;
@@ -157,18 +161,6 @@ $generic-bg: #db4c3f;
         font-smooth: always;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-
-    .add-task__main {
-        background-color: #282828;
-
-        .header {
-            color: #f0f0f0;
-        }
-
-        .add-task__cancel-x {
-            color: #fff;
-        }
     }
 
     .sidebar {
