@@ -147,6 +147,59 @@ $generic-bg: #db4c3f;
         background-color: #282828;
         border-color: transparent;
     }
+
+    body {
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        font-family: 'Roboto', sans-serif;
+        background-color: #282828;
+        font-smooth: always;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .add-task__main {
+        background-color: #282828;
+
+        .header {
+            color: #f0f0f0;
+        }
+
+        .add-task__cancel-x {
+            color: #fff;
+        }
+    }
+
+    .sidebar {
+        background-color: #282828;
+
+        &__middle h2 {
+            color: rgb(0, 0, 0);
+        }
+
+        &__generic span {
+            color: rgb(0, 0, 0);
+        }
+
+        &__project-name {
+            color: rgb(0, 0, 0);
+        }
+    }
+
+    .content {
+        color: #fffefe;
+        background-color: #282828;
+    }
+
+    .tasks {
+        color: #ffffff;
+        background-color: #282828;
+
+        &__list span {
+            color: #ffffff;
+        }
+    }
 }
 
 /* Header
